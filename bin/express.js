@@ -19,7 +19,7 @@ const app = express();
 /**
  * MONGODB CONNECTION - MONGOOSE
  */
-mongoose.connect(variables.Database.connection);
+mongoose.connect(variables.Database.connection, {useNewUrlParser: true});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

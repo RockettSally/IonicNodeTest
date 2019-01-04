@@ -1,36 +1,32 @@
 'use strict'
-require('../models/produto-model');
-const mongoose = require('mongoose');
-const produto = mongoose.model('Produto');
+const produtoRepository = require('../repositories/produto-repository');
 
 function produtoController(){
 
 }
 
 produtoController.prototype.get = async (req, res) => {
-    let lista = await produto.find();
-    res.status(200).send(lista);
+    let resultado = await new produtoRepository().getAll();
+    res.status(200).send(resultado);
 };
 
 produtoController.prototype.getById = async (req, res) => {
-    let produtoEncontrado = await produto.findById(req.params.id);
-    res.status(200).send(produtoEncontrado);
+    let resultado = await new produtoRepository().getById(req.params.id);
+    res.status(200).send(resultado);
 };
 
 produtoController.prototype.post = async (req, res) => {
-    let novoProduto = new produto(req.body);
-    let resultado = await novoProduto.save();
+    let resultado = await new produtoRepository().create(req.body);
     res.status(201).send(resultado);
 };
 
 produtoController.prototype.put = async (req, res) => {
-    await produto.findByIdAndUpdate(req.params.id, { $set: req.body });
-    let produtoEncontrado = await produto.findById(req.params.id);
-    res.status(202).send(produtoEncontrado);
+    let resultado = await new produtoRepository().update(req.params.id, req.body);
+    res.status(202).send(resultado);
 };
 
 produtoController.prototype.delete = async (req, res) => {
-    let itemRemovido = await produto.findByIdAndDelete(req.params.id);
+    let itemRemovido = await new produtoRepository().delete(req.params.id);
     res.status(204).send(itemRemovido);
 };
 
