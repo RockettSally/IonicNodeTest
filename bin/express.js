@@ -28,5 +28,6 @@ app.use(bodyParser.urlencoded({
 
 app.use('/api/categoria', routes.categoria);
 app.use('/api/produto', routes.produto);
+app.use('/api/usuario', routes.usuario);
 
 module.exports = app;
