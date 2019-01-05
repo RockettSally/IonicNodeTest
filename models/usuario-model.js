@@ -21,7 +21,7 @@ const usuarioModel = new schema({
         type: String
     },
     ativo: {
-        type: Boolean, required: true
+        type: Boolean, required: true, default: true
     },
     dataCriacao: {
         type: Date,

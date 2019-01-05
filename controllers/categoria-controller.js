@@ -1,18 +1,18 @@
 'use strict'
 const categoriaRepository = require('../repositories/categoria-repository');
+const baseController = require('../bin/base/base-controller');
+const _rep = new categoriaRepository();
 
 function categoriaController(){
 
 }
 
 categoriaController.prototype.get = async (req, res) => {
-    let lista = await new categoriaRepository().getAll();
-    res.status(200).send(lista);
+    baseController.get(_rep, req, res);
 };
 
 categoriaController.prototype.getById = async (req, res) => {
-    let categoriaEncontrada = await new categoriaRepository().getById(req.params.id);
-    res.status(200).send(categoriaEncontrada);
+    baseController.getById(_rep, req, res);
 };
 
 categoriaController.prototype.post = async (req, res) => {
